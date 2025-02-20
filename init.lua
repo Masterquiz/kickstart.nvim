@@ -2,6 +2,14 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.filetype.add {
+  extension = {
+    apl = 'apl',
+  },
+}
+
+require 'custom.apl'
+
 --
 -- [[ Setting options ]]
 --
@@ -57,7 +65,7 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
--- vim.opt.scrolloff = 20
+vim.opt.scrolloff = 6
 
 --
 -- [[ Basic Keymaps ]]
@@ -357,18 +365,24 @@ require('lazy').setup({
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
       local servers = {
-        -- clangd = {},
-        -- gopls = {},
+        trivy = {
+          filetypes = { 'java' },
+        },
+
         pyright = {},
-        -- rust_analyzer = {},
-        -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-        --
-        -- Some languages (like typescript) have entire language plugins that can be useful:
-        --    https://github.com/pmizio/typescript-tools.nvim
-        --
-        -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
-        --
+        djlint = {
+          filetypes = { 'htmldjango' },
+          settings = {
+            djlint = {
+              indent = 6,
+              blank_line_after_tag = 'load,extends,include',
+            },
+          },
+        },
+
+        -- java_language_server = {},
+        jdtls = {},
+        ['google-java-format'] = {},
 
         lua_ls = {
           -- cmd = {...},
@@ -382,13 +396,18 @@ require('lazy').setup({
             },
           },
         },
+
+        cssls = {},
       }
 
       require('mason').setup()
 
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'stylua', -- Used to format Lua code
+        'stylua',
+        'isort',
+        'black',
+        'prettier',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -402,6 +421,12 @@ require('lazy').setup({
         },
       }
     end,
+  },
+
+  { -- Install typescript language server
+    'pmizio/typescript-tools.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+    opts = {},
   },
 
   { -- Autoformat
@@ -438,8 +463,11 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        -- Conform can also run multiple formatters sequentially
         python = { 'isort', 'black' },
+        htmldjango = { 'djlint' },
+        java = { 'google-java-format' },
+        typescript = { 'prettier' },
+        typescriptreact = { 'prettier' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
@@ -609,10 +637,35 @@ require('lazy').setup({
   require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   { import = 'custom.plugins' },
+
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'echasnovski/mini.nvim', -- if you use the mini.nvim suite
+      -- 'echasnovski/mini.icons' -- if you use standalone mini plugins
+      -- 'nvim-tree/nvim-web-devicons' -- if you prefer nvim-web-devicons
+    },
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {
+      --   -- callout = {
+      --   --   note = { raw = '[!NOTE]', rendered = 'U000f02fd Note', highlight = 'RenderMarkdownInfo' },
+      --   --   -- Other callouts can be added similarly
+      --   -- },
+      --   html = {
+      --     enabled = true,
+      --     comment = {
+      --       conceal = true,
+      --       highlight = 'RenderMarkdownHtmlComment',
+      --     },
+      --   },
+    },
+  },
 }, {
   ui = {
     icons = {},
