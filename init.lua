@@ -1,6 +1,4 @@
--- Set <space> as the leader key
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+require 'custom.apl'
 
 vim.filetype.add {
   extension = {
@@ -8,7 +6,9 @@ vim.filetype.add {
   },
 }
 
-require 'custom.apl'
+-- Set <space> as the leader key
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 --
 -- [[ Setting options ]]
@@ -115,7 +115,7 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
 -- [[ Configure and install plugins ]]
 --
 
--- Install `lazy.nvim` plugin manager ]]
+-- Install `lazy.nvim` plugin manager
 vim.opt.rtp:prepend(vim.fn.stdpath 'data' .. '/lazy/lazy.nvim')
 
 require('lazy').setup({
@@ -199,7 +199,7 @@ require('lazy').setup({
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
-      pcall(require('telescope').load_extension, 'file_browser')
+      -- pcall(require('telescope').load_extension, 'file_browser') -- Commented out because it was giving a bug
 
       local builtin = require 'telescope.builtin'
 
@@ -641,31 +641,6 @@ require('lazy').setup({
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   { import = 'custom.plugins' },
-
-  {
-    'MeanderingProgrammer/render-markdown.nvim',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      'echasnovski/mini.nvim', -- if you use the mini.nvim suite
-      -- 'echasnovski/mini.icons' -- if you use standalone mini plugins
-      -- 'nvim-tree/nvim-web-devicons' -- if you prefer nvim-web-devicons
-    },
-    ---@module 'render-markdown'
-    ---@type render.md.UserConfig
-    opts = {
-      --   -- callout = {
-      --   --   note = { raw = '[!NOTE]', rendered = 'U000f02fd Note', highlight = 'RenderMarkdownInfo' },
-      --   --   -- Other callouts can be added similarly
-      --   -- },
-      --   html = {
-      --     enabled = true,
-      --     comment = {
-      --       conceal = true,
-      --       highlight = 'RenderMarkdownHtmlComment',
-      --     },
-      --   },
-    },
-  },
 }, {
   ui = {
     icons = {},
