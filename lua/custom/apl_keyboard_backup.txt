@@ -10,7 +10,7 @@ xkb_symbols "it_apl" {
    key <AB04> { [	NoSymbol,	NoSymbol,	U222A,		NoSymbol	] };
    key <AB05> { [	NoSymbol,	NoSymbol,	U22a5,		U236d		] };
    key <AB06> { [	NoSymbol,	NoSymbol,	U22a4,		U2361		] };
-   key <AB07> { [	NoSymbol,	NoSymbol,	NoSymbol,	NoSymbol	] };
+   key <AB07> { [	NoSymbol,	NoSymbol,	U236c,		NoSymbol	] };
    key <AB08> { [	NoSymbol,	NoSymbol,	U235d,		U236a		] };
    key <AB09> { [	NoSymbol,	NoSymbol,	U2340,		U2360		] };
    key <AB10> { [	NoSymbol,	NoSymbol,	U233f,		U2339		] };
@@ -22,7 +22,7 @@ xkb_symbols "it_apl" {
    key <AC05> { [	NoSymbol,	NoSymbol,	U2207,		NoSymbol	] };
    key <AC06> { [	NoSymbol,	NoSymbol,	U2206,		NoSymbol	] };
    key <AC07> { [	NoSymbol,	NoSymbol,	U2218,		U2364		] };
-   key <AC08> { [	NoSymbol,	NoSymbol,	NoSymbol,	U2338		] };
+   key <AC08> { [	NoSymbol,	NoSymbol,	U235e,		U2338		] };
    key <AC09> { [	NoSymbol,	NoSymbol,	U2395,		U2337		] };
    key <AC10> { [	NoSymbol,	NoSymbol,	NoSymbol,	U234e		] };
    key <AC11> { [	NoSymbol,	NoSymbol,	NoSymbol,	U2355		] };
@@ -37,8 +37,8 @@ xkb_symbols "it_apl" {
    key <AD08> { [	NoSymbol,	NoSymbol,	U2373,		U2336		] };
    key <AD09> { [	NoSymbol,	NoSymbol,	U25cb,		U2365		] };
    key <AD10> { [	NoSymbol,	NoSymbol,	asterisk,	U2363		] };
-   key <AD11> { [	NoSymbol,	NoSymbol,	NoSymbol,	U235e		] };
-   key <AD12> { [	NoSymbol,	NoSymbol,	NoSymbol,	U236c		] };
+   key <AD11> { [	NoSymbol,	NoSymbol,	NoSymbol,	NoSymbol	] };
+   key <AD12> { [	NoSymbol,	NoSymbol,	NoSymbol,	NoSymbol	] };
    
    key <AE01> { [	NoSymbol,	NoSymbol,	diaeresis,	U2368		] };
    key <AE02> { [	NoSymbol,	NoSymbol,	macron,		NoSymbol	] };
@@ -57,4 +57,3 @@ xkb_symbols "it_apl" {
    key <LSGT> { [	NoSymbol,	NoSymbol,	U2261,		U2262		] };
    key <TLDE> { [	NoSymbol,	NoSymbol,	U22c4,		U233a		] };
 };
-
